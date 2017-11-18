@@ -1,0 +1,256 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <!-- ====================================================================== -->
+    <!-- P A R E N T P R O J E C T D E S C R I P T I O N -->
+    <!-- ====================================================================== -->
+
+    <groupId>com.aem.community</groupId>
+    <artifactId>demoproject</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
+
+    <name>My Demo Project - Reactor Project</name>
+    <description>Maven Multimodule project for My Demo Project.</description>
+
+    <prerequisites>
+        <maven>3.0.2</maven>
+    </prerequisites>
+
+    <!-- ====================================================================== -->
+    <!-- P R O P E R T I E S -->
+    <!-- ====================================================================== -->
+    <properties>
+        <crx.host>localhost</crx.host>
+        <crx.port>4502</crx.port>
+        <crx.username>admin</crx.username>
+        <crx.password>admin</crx.password>
+        <publish.crx.host>localhost</publish.crx.host>
+        <publish.crx.port>4503</publish.crx.port>
+        <publish.crx.username>admin</publish.crx.username>
+        <publish.crx.password>admin</publish.crx.password>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.core</artifactId>
+                <version>4.2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.osgi</groupId>
+                <artifactId>org.osgi.compendium</artifactId>
+                <version>4.2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>org.apache.felix.scr.annotations</artifactId>
+                <version>1.9.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>biz.aQute</groupId>
+                <artifactId>bndlib</artifactId>
+                <version>1.43.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.slf4j</groupId>
+                <artifactId>slf4j-api</artifactId>
+                <version>1.5.10</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.servlet</groupId>
+                <artifactId>servlet-api</artifactId>
+                <version>2.5</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>javax.jcr</groupId>
+                <artifactId>jcr</artifactId>
+                <version>2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.api</artifactId>
+                <version>2.2.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.sling</groupId>
+                <artifactId>org.apache.sling.jcr.api</artifactId>
+                <version>2.1.0</version>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <version>4.8.1</version>
+                <scope>test</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.adobe.aem</groupId>
+                <artifactId>uber-jar</artifactId>
+                <version>6.3.0</version>
+                <classifier>obfuscated-apis</classifier>
+                <scope>provided</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.apache.geronimo.specs</groupId>
+                <artifactId>geronimo-atinject_1.0_spec</artifactId>
+                <version>1.0</version>
+                <scope>provided</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <!--
+        Inclusion of repositories in POMs is controversial, to say the least.
+        It would be best if you proxied the Adobe repository using a Maven
+        Repository Manager. Once you do that, remove these sections.
+     -->
+    <repositories>
+        <repository>
+            <id>adobe-public-releases</id>
+            <name>Adobe Public Repository</name>
+            <url>https://repo.adobe.com/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </repository>
+    </repositories>
+    <pluginRepositories>
+        <pluginRepository>
+            <id>adobe-public-releases</id>
+            <name>Adobe Public Repository</name>
+            <url>https://repo.adobe.com/nexus/content/groups/public/</url>
+            <layout>default</layout>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-scr-plugin</artifactId>
+                    <version>1.21.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.felix</groupId>
+                    <artifactId>maven-bundle-plugin</artifactId>
+                    <version>2.5.4</version>  <!-- newest is 3.0.0 -->
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-compiler-plugin</artifactId>
+                    <version>3.2</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-resources-plugin</artifactId>
+                    <version>2.7</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>maven-sling-plugin</artifactId>
+                    <version>2.1.0</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.sling</groupId>
+                    <artifactId>maven-jspc-plugin</artifactId>
+                    <version>2.0.8</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>com.day.jcr.vault</groupId>
+                    <artifactId>content-package-maven-plugin</artifactId>
+                    <version>0.0.24</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.apache.maven.plugins</groupId>
+                    <artifactId>maven-surefire-plugin</artifactId>
+                    <version>2.18.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>versions-maven-plugin</artifactId>
+                    <version>2.1</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>buildnumber-maven-plugin</artifactId>
+                    <version>1.2</version>
+                </plugin>
+
+                <plugin>
+                    <groupId>org.jsonschema2pojo</groupId>
+                    <artifactId>jsonschema2pojo-maven-plugin</artifactId>
+                    <version>0.4.15</version>
+                </plugin>
+
+            </plugins>
+        </pluginManagement>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+
+                <configuration>
+                    <source>${maven.compiler.source}</source>
+                    <target>${maven.compiler.target}</target>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <configuration>
+                    <encoding>${project.build.sourceEncoding}</encoding>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+
+    <profiles>
+        <profile>
+            <id>autoInstallBundle</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <groupId>org.apache.sling</groupId>
+                        <artifactId>maven-sling-plugin</artifactId>
+                        <executions>
+                            <execution>
+                                <id>install-bundle</id>
+                                <phase>package</phase>
+                                <goals>
+                                    <goal>install</goal>
+                                </goals>
+                            </execution>
+                        </executions>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+  <modules>
+    <module>bundle</module>
+    <module>content</module>
+  </modules>
+</project>

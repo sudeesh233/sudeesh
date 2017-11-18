@@ -1,0 +1,12 @@
+<h1>This is my Demo Component:</h1>
+
+<h2>Dialog Properties:</h2>
+<div data-sly-use.heroTextObject="com.demo.project.HeroTextComponent" data-sly-test="${heroTextObject}">
+       <h4>Heading Text: ${heroTextObject.heroTextBean.headingText}</h4>
+       <h4>Description : ${heroTextObject.heroTextBean.description}</h4>
+</div>
+<h2>Page Properties:</h2>
+<div>
+       <h4>PageTitle: ${pageProperties['pageTitle']}</h4>
+       <h4>jcr:title: ${pageProperties['jcr:title']}</h4>
+</div>
